@@ -1,7 +1,7 @@
 import React from "react";
 import RowItem from "./row-item"
 
-const RowTitleItem = ({ row, name }) => {
+export const RowTitleItem = ({ row, name }) => {
   const handleDragStart = () => {
     event.dataTransfer.clearData();
     event.dataTransfer.setData("fromCell", "false")
