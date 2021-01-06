@@ -5,6 +5,7 @@ const RowTitleItem = ({ row }) => {
   const handleDragStart = () => {
     event.dataTransfer.clearData();
     event.dataTransfer.setData("fromCell", "false")
+    event.dataTransfer.setData("fromRow", row)
   }
 
   return (

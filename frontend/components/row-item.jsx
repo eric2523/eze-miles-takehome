@@ -1,36 +1,59 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateCategoryRewards, deleteCategoryRewards, receiveCategoryRewards } from "../actions/category-rewards-actions";
+import {
+  updateCategoryRewards,
+  deleteCategoryRewards,
+  receiveCategoryRewards,
+} from "../actions/category-rewards-actions";
 
-const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch }) => {
+const RowItem = ({
+  categoryReward,
+  row,
+  col,
+  rewards,
+  draggable,
+  empty,
+  dispatch,
+}) => {
   const handleDragStart = () => {
     event.dataTransfer.clearData();
-    event.dataTransfer.setData("categoryRewardId", JSON.stringify(categoryReward));
+    event.dataTransfer.setData(
+      "categoryRewardId",
+      JSON.stringify(categoryReward)
+    );
     event.dataTransfer.setData("fromCell", "true");
+    event.dataTransfer.setData("fromRow", row + 1);
   };
 
   const handleDrop = () => {
-    let fromCell = Boolean(event.dataTransfer.getData("fromCell") === "true")
-    let targetRow = row + 1
-    let targetCol = col + 1
+    let fromCell = Boolean(event.dataTransfer.getData("fromCell") === "true");
+    let targetRow = row + 1;
+    let targetCol = col + 1;
+    let fromRow = parseInt(event.dataTransfer.getData("fromRow"));
 
-    if (fromCell && empty){
-      let fromCategoryReward = JSON.parse(event.dataTransfer.getData("categoryRewardId"));
-      // plus 1 to account for the headings 
-      if (!categoryReward){
-        fromCategoryReward.categoryId = targetCol
-        fromCategoryReward.rewardId = targetRow
-        dispatch(updateCategoryRewards(fromCategoryReward))
-      }
-    } else {
-      if (empty){
-        let newCategoryReward = {
-          id: Math.random() * 10000,
-          categoryId: targetCol,
-          rewardId: targetRow
+    if (fromRow === targetRow) {
+      if (fromCell && empty) {
+        let fromCategoryReward = JSON.parse(
+          event.dataTransfer.getData("categoryRewardId")
+        );
+        // plus 1 to account for the headings
+        // conditional checks if the cell is empty (falsy value)
+        if (!categoryReward) {
+          fromCategoryReward.categoryId = targetCol;
+          fromCategoryReward.rewardId = targetRow;
+          dispatch(updateCategoryRewards(fromCategoryReward));
         }
-  
-        dispatch(receiveCategoryRewards(newCategoryReward))
+      } else {
+        // debugger
+        if (empty) {
+          let newCategoryReward = {
+            id: Math.random() * 10000,
+            categoryId: targetCol,
+            rewardId: targetRow,
+          };
+
+          dispatch(receiveCategoryRewards(newCategoryReward));
+        }
       }
     }
   };
@@ -40,8 +63,8 @@ const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch
   };
 
   const handleClick = () => {
-    dispatch(deleteCategoryRewards(categoryReward.id))
-  }
+    dispatch(deleteCategoryRewards(categoryReward.id));
+  };
 
   let content = null;
 
@@ -59,10 +82,10 @@ const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch
       </td>
     );
   } else {
-    content = <td key={col} draggable={draggable} onDrop={ handleDrop }></td>;
+    content = <td key={col} draggable={draggable} onDrop={handleDrop}></td>;
   }
 
   return content;
 };
 
-export default connect()(RowItem)
+export default connect()(RowItem);
