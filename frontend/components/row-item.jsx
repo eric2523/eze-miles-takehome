@@ -12,7 +12,7 @@ const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch
     let fromCell = Boolean(event.dataTransfer.getData("fromCell") === "true")
     let targetRow = row + 1
     let targetCol = col + 1
-    if (fromCell){
+    if (fromCell && empty){
       let fromCategoryReward = JSON.parse(event.dataTransfer.getData("categoryRewardId"));
       // plus 1 to account for the headings 
       if (!categoryReward){
