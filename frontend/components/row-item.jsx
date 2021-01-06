@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateCategoryRewards } from "../actions/category-rewards-actions";
+import { updateCategoryRewards, deleteCategoryRewards } from "../actions/category-rewards-actions";
 
 const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch }) => {
   const handleDragStart = () => {
@@ -23,6 +23,10 @@ const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch
     event.stopPropagation();
   };
 
+  const handleClick = () => {
+    dispatch(deleteCategoryRewards(categoryReward.id))
+  }
+
   let content = null;
 
   if (!empty) {
@@ -35,6 +39,7 @@ const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch
         onDragOver={handleDragOver}
       >
         {rewards.byId[categoryReward.rewardId].name}
+        <span onClick={handleClick}>X</span>
       </td>
     );
   } else {

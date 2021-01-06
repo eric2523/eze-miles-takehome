@@ -18,7 +18,7 @@ export const RowIndex = ({ row, idx, rewards }) => {
         />
       );
     } else {
-      r.push(<RowItem key={colIdx} row={idx} col={colIdx} empty={true} draggable={false} />);
+      r.push(<RowItem key={`${idx}-${colIdx}`} row={idx} col={colIdx} empty={true} draggable={false} />);
     }
   });
 
