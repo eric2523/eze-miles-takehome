@@ -61,7 +61,7 @@ const TableIndex = ({ categories, rewards, categoryRewards }) => {
   };
 
   return (
-    <div>
+    <div className="table-div">
       <table onDragOver={handleDragOver}>
         <thead>
           <tr>

@@ -3,8 +3,10 @@ import { connect } from "react-redux"
 
 const CategorySubheaderItem = ({ name }) => {
   return (
-    <th>
-      { name }
+    <th className="cat-subhead">
+      <h2>
+        { name }
+      </h2>
     </th>
   )
 }
