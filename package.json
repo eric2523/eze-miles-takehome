@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --mode=development --watch"
+    "webpack": "webpack --mode=development --watch",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,10 @@
     "webpack-cli": "^4.3.1"
   },
   "devDependencies": {
-    "@testing-library/dom": "^7.29.1"
+    "@testing-library/dom": "^7.29.1",
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.2",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
   }
 }

@@ -13,12 +13,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/, //read all js and jsx files
+        test: /\.(js|jsx)$/, //read all js and jsx files
         exclude: /(node_modules)/, //don't include this EVER; it heavy
         use: {
           loader: "babel-loader", //tell webpack to use this to apply changes
           query: {
-            presets: ["@babel/env", "@babel/react"], //rules we set when webpack goes through this loader
+            presets: ['@babel/preset-env', '@babel/preset-react'], //rules we set when webpack goes through this loader
           },
         },
       },
