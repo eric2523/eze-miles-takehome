@@ -1,9 +1,11 @@
 import React from "react"
-import TableContainer from "./table_container"
+import TableIndex from "./table-index"
 
 const App = () => {
   return (
-    <TableContainer />
+    <div>
+      <TableIndex />
+    </div>
   )
 }
 

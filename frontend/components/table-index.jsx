@@ -64,6 +64,16 @@ const TableIndex = ({ categories, rewards, categoryRewards }) => {
     <div>
       <table onDragOver={handleDragOver}>
         <thead>
+          <tr>
+            <th>
+              <h1>rewards</h1>
+            </th>
+            <th>
+              <h1>categories</h1>
+            </th>
+          </tr>
+        </thead>
+        <thead>
           <CategorySubheader />
         </thead>
         <tbody id="test">{content}</tbody>
