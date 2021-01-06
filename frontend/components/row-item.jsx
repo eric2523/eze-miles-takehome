@@ -71,6 +71,7 @@ const RowItem = ({
   if (!empty) {
     content = (
       <td
+        data-testid="row-item"
         key={categoryReward.id}
         draggable={draggable}
         onDragStart={handleDragStart}
@@ -78,11 +79,11 @@ const RowItem = ({
         onDragOver={handleDragOver}
       >
         {rewards.byId[categoryReward.rewardId].name}
-        <span onClick={handleClick}>X</span>
+        <span data-testid="x-btn" onClick={handleClick}>X</span>
       </td>
     );
   } else {
-    content = <td key={col} draggable={draggable} onDrop={handleDrop}></td>;
+    content = <td data-testid="empty-row-item" key={col} draggable={draggable} onDrop={handleDrop}></td>;
   }
 
   return content;
