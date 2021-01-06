@@ -1,0 +1,15 @@
+table, thead, td, th {
+  border: 1px solid black;
+}
+
+thead {
+  text-align: right;
+}
+
+td, th {
+  padding: 20px;
+}
+
+.draggables {
+  padding: 50px;
+}
