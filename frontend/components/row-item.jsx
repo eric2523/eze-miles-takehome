@@ -4,6 +4,7 @@ import { updateCategoryRewards, deleteCategoryRewards, receiveCategoryRewards } 
 
 const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch }) => {
   const handleDragStart = () => {
+    event.dataTransfer.clearData();
     event.dataTransfer.setData("categoryRewardId", JSON.stringify(categoryReward));
     event.dataTransfer.setData("fromCell", "true");
   };
@@ -12,6 +13,7 @@ const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch
     let fromCell = Boolean(event.dataTransfer.getData("fromCell") === "true")
     let targetRow = row + 1
     let targetCol = col + 1
+
     if (fromCell && empty){
       let fromCategoryReward = JSON.parse(event.dataTransfer.getData("categoryRewardId"));
       // plus 1 to account for the headings 

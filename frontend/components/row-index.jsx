@@ -3,6 +3,7 @@ import RowItem from "./row-item"
 
 const RowTitleItem = ({ row }) => {
   const handleDragStart = () => {
+    event.dataTransfer.clearData();
     event.dataTransfer.setData("fromCell", "false")
   }
 
