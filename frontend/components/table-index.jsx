@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import CategorySubheader from "./category-subheader";
+import { RowIndex } from "./row-index";
 
 const TableIndex = ({ categories, rewards, categoryRewards }) => {
   let rowCount = rewards.allIds.length;
@@ -27,7 +28,6 @@ const TableIndex = ({ categories, rewards, categoryRewards }) => {
       let rewardItem = categoryRewards.byId[id];
       let row = rewardItem.rewardId;
       let col = rewardItem.categoryId;
-      // let name = rewards.byId[row].name;
 
       newTable[row - 1][col - 1] = rewardItem;
     }
@@ -42,25 +42,8 @@ const TableIndex = ({ categories, rewards, categoryRewards }) => {
     table.forEach((row, idx) => {
       let r = [];
 
-      row.forEach((categoryReward, idx) => {
-        if (categoryReward !== null){
-          r.push(
-            <td key={categoryReward.id}>
-              {rewards.byId[categoryReward.rewardId].name}
-            </td>
-          );
-        } else {
-          r.push(
-            <td key={ idx }></td>
-          )
-        }
-      });
-
       content.push(
-        <tr key={ idx } >
-          <td>{"R" + idx}</td>
-          {r}
-        </tr>
+        <RowIndex key={idx} row={row} idx={idx} rewards={rewards} />
       );
     });
     return content;
@@ -73,10 +56,13 @@ const TableIndex = ({ categories, rewards, categoryRewards }) => {
     createContent();
   });
 
+  const handleDragOver = () => {
+    event.preventDefault();
+  };
+
   return (
     <div>
-      {/* <table onDragOver={this.handleDragOver}> */}
-      <table>
+      <table onDragOver={handleDragOver}>
         <thead>
           <CategorySubheader />
         </thead>
