@@ -1,6 +1,18 @@
 import React from "react";
 import RowItem from "./row-item"
 
+const RowTitleItem = ({ row }) => {
+  const handleDragStart = () => {
+    event.dataTransfer.setData("fromCell", "false")
+  }
+
+  return (
+    <td draggable="true" onDragStart={handleDragStart}>
+      {"R" + row}
+    </td>
+  )
+}
+
 export const RowIndex = ({ row, idx, rewards }) => {
   let r = [];
 
@@ -24,7 +36,7 @@ export const RowIndex = ({ row, idx, rewards }) => {
 
   return (
     <tr key={idx}>
-      <td>{"R" + (idx + 1)}</td>
+      <RowTitleItem row={idx + 1} />
       {r}
     </tr>
   );

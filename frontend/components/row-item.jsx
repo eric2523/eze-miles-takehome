@@ -5,17 +5,21 @@ import { updateCategoryRewards, deleteCategoryRewards } from "../actions/categor
 const RowItem = ({ categoryReward, row, col, rewards, draggable, empty, dispatch }) => {
   const handleDragStart = () => {
     event.dataTransfer.setData("categoryRewardId", JSON.stringify(categoryReward));
+    event.dataTransfer.setData("fromCell", "true");
   };
 
   const handleDrop = () => {
-    let fromCategoryReward = JSON.parse(event.dataTransfer.getData("categoryRewardId"));
-    // plus 1 to account for the headings 
-    let targetRow = row + 1
-    let targetCol = col + 1
-    if (!categoryReward){
-      fromCategoryReward.categoryId = targetCol
-      fromCategoryReward.rewardId = targetRow
-      dispatch(updateCategoryRewards(fromCategoryReward))
+    let fromCell = Boolean(event.dataTransfer.getData("fromCell") === "true")
+    if (fromCell){
+      let fromCategoryReward = JSON.parse(event.dataTransfer.getData("categoryRewardId"));
+      // plus 1 to account for the headings 
+      let targetRow = row + 1
+      let targetCol = col + 1
+      if (!categoryReward){
+        fromCategoryReward.categoryId = targetCol
+        fromCategoryReward.rewardId = targetRow
+        dispatch(updateCategoryRewards(fromCategoryReward))
+      }
     }
   };
 
