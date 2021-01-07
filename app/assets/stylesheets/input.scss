@@ -1,0 +1,67 @@
+$background-color: #7a7d7d;
+$secondary-bg-color: #fffbfe;
+$third-bg-color: #f98948;
+$third-bg-color-a: rgba(249, 137, 72, 0.75);
+$accent-color: #302f4d;
+$primary-font: "Open Sans", sans-serif;
+
+body {
+  font-family: $primary-font;
+  font-size: 16px;
+  background-color: $background-color;
+}
+
+td,
+th {
+  padding: 20px;
+}
+
+.table-item {
+  background-color: $secondary-bg-color;
+}
+
+.x-btn {
+  margin: 10px;
+  padding: 2px 10px;
+  border: 1px solid rgba(0,0,0, 0.5);
+  background: white;
+  border-radius: 5px;
+}
+
+.x-btn:hover {
+  cursor: pointer;
+}
+
+.grabbers:hover{
+  cursor: grab;
+}
+
+.grabbing:active {
+  cursor: grabbing;
+}
+
+.row-subheader, .table-item-filled {
+  background-color: $third-bg-color-a;
+}
+
+.subheader {
+  background-color: $third-bg-color;
+  border: none;
+}
+
+.draggables {
+  padding: 50px;
+}
+
+.table-div {
+  margin-top: 50px;
+}
+
+.table-div table {
+  margin: 0 auto;
+}
+
+.cat-subhead > h2 {
+  font-size: 20px;
+  letter-spacing: 0.04rem;
+}

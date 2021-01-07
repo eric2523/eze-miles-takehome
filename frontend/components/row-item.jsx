@@ -15,6 +15,7 @@ export const RowItem = ({
   empty,
   dispatch,
 }) => {
+  
   const handleDragStart = () => {
     event.dataTransfer.clearData();
     event.dataTransfer.setData(
@@ -23,6 +24,7 @@ export const RowItem = ({
     );
     event.dataTransfer.setData("fromCell", "true");
     event.dataTransfer.setData("fromRow", row + 1);
+    event.target.classList.toggle("grabbing")
   };
 
   const handleDrop = () => {
@@ -55,6 +57,7 @@ export const RowItem = ({
         }
       }
     }
+    event.target.classList.toggle("grabbing")
   };
 
   const handleDragOver = () => {
@@ -70,6 +73,7 @@ export const RowItem = ({
   if (!empty) {
     content = (
       <td
+        className="table-item-filled grabbers"
         data-testid="row-item"
         key={categoryReward.id}
         draggable={draggable}
@@ -78,11 +82,21 @@ export const RowItem = ({
         onDragOver={handleDragOver}
       >
         {rewards.byId[categoryReward.rewardId].name}
-        <span data-testid="x-btn" onClick={handleClick}>X</span>
+        <span className="x-btn" data-testid="x-btn" onClick={handleClick}>
+          X
+        </span>
       </td>
     );
   } else {
-    content = <td data-testid="empty-row-item" key={col} draggable={draggable} onDrop={handleDrop}></td>;
+    content = (
+      <td
+        className="table-item"
+        data-testid="empty-row-item"
+        key={col}
+        draggable={draggable}
+        onDrop={handleDrop}
+      ></td>
+    );
   }
 
   return content;

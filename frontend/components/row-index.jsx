@@ -9,7 +9,7 @@ export const RowTitleItem = ({ row, name }) => {
   }
 
   return (
-    <td draggable="true" onDragStart={handleDragStart}>
+    <td className="row-subheader grabbers" draggable="true" onDragStart={handleDragStart}>
       {"R" + row + ": "}
       { name }
     </td>

@@ -73,10 +73,10 @@ const TableIndex = ({ categories, rewards, categoryRewards }) => {
             </th>
           </tr>
         </thead>
-        <thead>
+        <thead className="subheader">
           <CategorySubheader />
         </thead>
-        <tbody id="test">{content}</tbody>
+        <tbody className="table-body" id="test">{content}</tbody>
       </table>
     </div>
   );
