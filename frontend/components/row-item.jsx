@@ -6,7 +6,7 @@ import {
   receiveCategoryRewards,
 } from "../actions/category-rewards-actions";
 
-const RowItem = ({
+export const RowItem = ({
   categoryReward,
   row,
   col,
