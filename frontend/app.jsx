@@ -7,7 +7,9 @@ import { preloadedState } from "./preloaded-state"
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root")
-  const store = configureStore(preloadedState)
+  let cache = JSON.parse(window.localStorage.getItem("cache"))
+  const initialState = (cache) ? cache : preloadedState
+  const store = configureStore(initialState)
 
   ReactDOM.render(<Root store={ store }/>, root)
   // testing on window stuff 

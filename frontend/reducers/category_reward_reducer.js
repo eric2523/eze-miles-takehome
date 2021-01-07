@@ -34,6 +34,8 @@ const categoryRewardReducer = (state = defaultState, action) => {
   }
 };
 
-const undoableCategoryRewardReducer = undoable(categoryRewardReducer)
+const undoableCategoryRewardReducer = undoable(categoryRewardReducer, {
+  limit: 7
+})
 
 export default undoableCategoryRewardReducer;
