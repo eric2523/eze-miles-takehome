@@ -1,10 +1,8 @@
 import React from "react";
-import { render, getByText, screen } from "./test-utils";
+import { render, screen } from "./test-utils";
 import App from "../frontend/components/app";
 import { preloadedState } from "../frontend/preloaded-state";
 import "@testing-library/jest-dom";
-import { RowItem } from "../frontend/components/row-item";
-import { connect } from "react-redux";
 import configureStore from "../frontend/store/store";
 import {
   receiveCategoryRewards,
