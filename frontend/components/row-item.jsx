@@ -15,7 +15,6 @@ export const RowItem = ({
   empty,
   dispatch,
 }) => {
-  
   const handleDragStart = () => {
     event.dataTransfer.clearData();
     event.dataTransfer.setData(
@@ -24,7 +23,7 @@ export const RowItem = ({
     );
     event.dataTransfer.setData("fromCell", "true");
     event.dataTransfer.setData("fromRow", row + 1);
-    event.target.classList.toggle("grabbing")
+    event.target.classList.toggle("grabbing");
   };
 
   const handleDrop = () => {
@@ -57,7 +56,7 @@ export const RowItem = ({
         }
       }
     }
-    event.target.classList.toggle("grabbing")
+    event.target.classList.toggle("grabbing");
   };
 
   const handleDragOver = () => {
@@ -81,10 +80,12 @@ export const RowItem = ({
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        {rewards.byId[categoryReward.rewardId].name}
-        <span className="x-btn" data-testid="x-btn" onClick={handleClick}>
-          X
-        </span>
+        <div className="row-item-div">
+          {rewards.byId[categoryReward.rewardId].name}
+          <span className="x-btn" data-testid="x-btn" onClick={handleClick}>
+            X
+          </span>
+        </div>
       </td>
     );
   } else {
