@@ -44,7 +44,6 @@ export const RowItem = ({
           dispatch(updateCategoryRewards(fromCategoryReward));
         }
       } else {
-        // debugger
         if (empty) {
           let newCategoryReward = {
             id: Math.random() * 10000,
