@@ -9,10 +9,10 @@ import {
   deleteCategoryRewards,
 } from "../frontend/actions/category-rewards-actions";
 import { fireEvent } from "@testing-library/dom";
-import rootReducer from "../frontend/reducers/root_reducer";
-import configureMockStore from "redux-mock-store"
+import configureMockStore from "redux-mock-store";
+import { Root } from "../frontend/components/root";
 
-describe("Table should be rendered", () => {
+describe("Table", () => {
   it("Should have approriate headers and subheaders", () => {
     render(<App />, { initialState: preloadedState });
 
@@ -26,8 +26,8 @@ describe("Table should be rendered", () => {
     );
   });
 
-  describe("Cells should be draggable", () => {
-    it("Should have data cells with draggable attributes", () => {
+  describe("Table Data", () => {
+    it("Should have draggable attributes", () => {
       render(<App />, { initialState: preloadedState });
 
       const nonEmpty = screen.getAllByTestId("row-item");
@@ -41,7 +41,7 @@ describe("Table should be rendered", () => {
       });
     });
 
-    it("Empty cells should have false draggable attributes", () => {
+    it("Empty cells should have draggable=false", () => {
       render(<App />, { initialState: preloadedState });
 
       const empty = screen.getAllByTestId("empty-row-item");
@@ -51,7 +51,7 @@ describe("Table should be rendered", () => {
       });
     });
 
-    it("Non-empty cells should have true draggable attributes", () => {
+    it("Non-empty cells should have draggable=true", () => {
       render(<App />, { initialState: preloadedState });
 
       const nonEmpty = screen.getAllByTestId("row-item");
@@ -63,11 +63,15 @@ describe("Table should be rendered", () => {
   });
 });
 
-describe("action creators", () => {
-  const mockStore = configureMockStore()
-  const store = mockStore(preloadedState)
+describe("Action Creators", () => {
+  let store, mockStore
 
-  it("Should be able to receive new categoryRewards", () => {
+  beforeEach(() => {
+    mockStore = configureMockStore();
+    store = mockStore(preloadedState);
+  })
+
+  it("Able to receive new categoryRewards", () => {
     store.dispatch(
       receiveCategoryRewards({
         id: 100,
@@ -75,12 +79,13 @@ describe("action creators", () => {
         rewardId: 100,
       })
     );
-  
-    expect(store.getActions()).toMatchSnapshot()
-    expect(store.getState().entities.categoryRewards.byId[100]).not.toBeEmpty
+
+    expect(store.getActions()).toMatchSnapshot();
+    expect(store.getState().entities.categoryRewards.present.byId[100]).not
+      .toBeEmpty;
   });
 
-  it("Should be able to update existing categoryRewards", () => {
+  it("Able to update existing categoryRewards", () => {
     store.dispatch(
       updateCategoryRewards({
         id: 1,
@@ -88,26 +93,57 @@ describe("action creators", () => {
         rewardId: 3,
       })
     );
-    
-    expect(store.getActions()).toMatchSnapshot()
+
+    expect(store.getActions()).toMatchSnapshot();
   });
 
-  it("Should be able to delete existing categoryRewards", () => {
+  it("Able to delete existing categoryRewards", () => {
     store.dispatch(deleteCategoryRewards(1));
 
-    expect(store.getActions()).toMatchSnapshot()
+    expect(store.getActions()).toMatchSnapshot();
   });
 });
 
-describe("Draggable and clickable elements", () => {
+describe("user interaction", () => {
   it("X button should remove data entry", () => {
     render(<App />, { initialState: preloadedState });
 
-    const buttons = screen.getAllByTestId("x-btn")
-    buttons.forEach(button => {
-      fireEvent.click(button)
-    })
-    let filledCells = screen.queryAllByTestId("row-item")
-    expect(filledCells).toBeEmpty
-  })
-})
+    const buttons = screen.getAllByTestId("x-btn");
+    buttons.forEach((button) => {
+      fireEvent.click(button);
+    });
+    let filledCells = screen.queryAllByTestId("row-item");
+    expect(filledCells).toBeEmpty;
+  });
+
+  it("Undo button should retrieve most recent action from past", () => {
+    render(<App />, { initialState: preloadedState });
+    const old = screen.getByTestId("main-table").innerHTML;
+    const button = screen.getAllByTestId("x-btn")[0];
+    const undoBtn = screen.getByTestId("undo-btn")
+
+    // click x button to create new display
+    fireEvent.click(button);
+    // click undo to revert back to old display
+    fireEvent.click(undoBtn)
+    expect(screen.getByTestId("main-table").innerHTML).toEqual(old);
+  });
+
+  it("Redo button should retrieve most recent action from future", () => {
+    render(<App />, { initialState: preloadedState });
+    const redoBtn = screen.getByTestId("redo-btn")
+    const undoBtn = screen.getByTestId("undo-btn")
+    const button = screen.getAllByTestId("x-btn")[0];
+
+    // click x button to create new display
+    fireEvent.click(button)
+    // save display
+    const old = screen.getByTestId("main-table").innerHTML;
+    // click undo
+    fireEvent.click(undoBtn)
+    // click redo
+    fireEvent.click(redoBtn)
+    // compare displays
+    expect(screen.getByTestId("main-table").innerHTML).toEqual(old);
+  });
+});

@@ -10,10 +10,10 @@ const HistoryButtons = ({ canUndo, canRedo, onUndo, onRedo, state }) => {
 
   return (
     <div>
-      <button onClick={onUndo} disabled={!canUndo}>
+      <button data-testid="undo-btn" onClick={onUndo} disabled={!canUndo}>
         Undo
       </button>
-      <button onClick={onRedo} disabled={!canRedo}>
+      <button data-testid="redo-btn" onClick={onRedo} disabled={!canRedo}>
         Redo
       </button>
       <button onClick={handleSave}>
