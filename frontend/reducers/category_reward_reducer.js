@@ -3,6 +3,7 @@ import {
   UPDATE_CATEGORY_REWARD,
   DELETE_CATEGORY_REWARD,
 } from "../actions/category-rewards-actions";
+import undoable from "redux-undo"
 
 const defaultState = {
   byId: {},
@@ -11,7 +12,9 @@ const defaultState = {
 
 const categoryRewardReducer = (state = defaultState, action) => {
   Object.freeze(state);
-  let newState = Object.assign({}, state);
+  //! FINALLY FIXED THIS BUG: Object.assign() is only a shallow dupe!!! 
+  //! For deep dupe use the stringify and parsing method bellow 
+  let newState = JSON.parse(JSON.stringify(state)) 
 
   switch (action.type) {
     case RECEIVE_CATEGORY_REWARD:
@@ -31,4 +34,6 @@ const categoryRewardReducer = (state = defaultState, action) => {
   }
 };
 
-export default categoryRewardReducer;
+const undoableCategoryRewardReducer = undoable(categoryRewardReducer)
+
+export default undoableCategoryRewardReducer;

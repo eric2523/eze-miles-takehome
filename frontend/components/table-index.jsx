@@ -86,7 +86,7 @@ const mSTP = (state) => {
   return {
     categories: state.entities.categories,
     rewards: state.entities.rewards,
-    categoryRewards: state.entities.categoryRewards,
+    categoryRewards: state.entities.categoryRewards.present,
   };
 };
 
