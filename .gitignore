@@ -2,3 +2,7 @@ bundle.js
 bundle.js.map
 node_modules
 settings.json
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
