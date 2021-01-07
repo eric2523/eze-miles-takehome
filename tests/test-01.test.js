@@ -99,8 +99,15 @@ describe("action creators", () => {
   });
 });
 
-describe("Clickable elements should update DOM accordingly", () => {
+describe("Draggable and clickable elements", () => {
   it("X button should remove data entry", () => {
     render(<App />, { initialState: preloadedState });
+
+    const buttons = screen.getAllByTestId("x-btn")
+    buttons.forEach(button => {
+      fireEvent.click(button)
+    })
+    let filledCells = screen.queryAllByTestId("row-item")
+    expect(filledCells).toBeEmpty
   })
 })
