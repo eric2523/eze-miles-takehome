@@ -7,6 +7,13 @@ td,
 th {
   padding: 20px; }
 
+th h1 {
+  color: #f98948;
+  text-transform: uppercase;
+  border-bottom: 1px solid black;
+  letter-spacing: 0.2rem;
+  font-size: 20px; }
+
 td {
   width: 150px;
   height: 75px; }
@@ -15,6 +22,7 @@ td {
   background-color: #fffbfe; }
 
 .x-btn {
+  transition: all 200ms ease-in-out;
   padding: 2px 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   background: white;
@@ -24,10 +32,17 @@ td {
   right: -15px; }
 
 .x-btn:hover {
-  cursor: pointer; }
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid red;
+  color: red; }
+
+.grabbers {
+  transition: all 200ms ease-in-out; }
 
 .grabbers:hover {
-  cursor: grab; }
+  cursor: grab;
+  background-color: #fdd9c4; }
 
 .grabbing:active {
   cursor: grabbing; }
@@ -46,16 +61,37 @@ td {
 .table-div table {
   margin: 0 auto; }
 
-.cat-subhead > h2 {
-  font-size: 20px;
-  letter-spacing: 0.04rem; }
-
 .row-item-div {
-  position: relative;
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  position: relative;
+  height: 100%;
+  width: 100%; }
+
+.cat-subhead h2 {
+  font-size: 20px;
+  color: #120d31;
+  letter-spacing: 0.1rem; }
+
+button {
+  transition: all 200ms ease-in-out;
+  font-size: 15px;
+  background-color: #90f1ef;
+  border: none;
+  margin: 5px;
+  padding: 10px 25px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer; }
+
+button:hover {
+  background-color: #4d8786; }
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=01.css.map */

@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import { connect } from 'react-redux'
 
-const HistoryButtons = ({ canUndo, canRedo, onUndo, onRedo, state }) => {
+const HistoryButtons = ({ canUndo, canRedo, onUndo, onRedo, state}) => {
   const handleSave = () => {
     let cache = JSON.stringify(state)
     window.localStorage.setItem("cache", cache)
   }
 
   return (
-    <div>
+    <div className="btn-div">
       <button data-testid="undo-btn" onClick={onUndo} disabled={!canUndo}>
         Undo
       </button>
@@ -27,7 +27,7 @@ const mapStateToProps = state => {
   return {
     canUndo: state.entities.categoryRewards.past.length > 0,
     canRedo: state.entities.categoryRewards.future.length > 0,
-    state: state
+    state: state,
   }
 }
 

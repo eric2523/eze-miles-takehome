@@ -2,8 +2,19 @@ $background-color: #7a7d7d;
 $secondary-bg-color: #fffbfe;
 $third-bg-color: #f98948;
 $third-bg-color-a: rgba(249, 137, 72, 0.75);
-$accent-color: #302f4d;
+$third-bg-light-shade: rgb(253, 217, 196);
+$secondary-font-color: rgb(18, 13, 49);
 $primary-font: "Open Sans", sans-serif;
+
+@mixin centered-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin base-transition {
+  transition: all 200ms ease-in-out
+}
 
 body {
   font-family: $primary-font;
@@ -16,6 +27,14 @@ th {
   padding: 20px;
 }
 
+th h1 {
+  color: $third-bg-color;
+  text-transform: uppercase;
+  border-bottom: 1px solid black;
+  letter-spacing: 0.2rem;
+  font-size: 20px;
+}
+
 td {
   width: 150px;
   height: 75px;
@@ -26,6 +45,7 @@ td {
 }
 
 .x-btn {
+  @include base-transition;
   padding: 2px 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   background: white;
@@ -37,10 +57,18 @@ td {
 
 .x-btn:hover {
   cursor: pointer;
+  background-color: rgba(0,0,0,0);
+  border: 1px solid red;
+  color: red;
+}
+
+.grabbers {
+  @include base-transition;
 }
 
 .grabbers:hover {
   cursor: grab;
+  background-color: $third-bg-light-shade;
 }
 
 .grabbing:active {
@@ -65,16 +93,36 @@ td {
   margin: 0 auto;
 }
 
-.cat-subhead > h2 {
-  font-size: 20px;
-  letter-spacing: 0.04rem;
-}
-
 .row-item-div {
+  @include centered-flex;
   position: relative;
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.cat-subhead h2 {
+  font-size: 20px;
+  color: $secondary-font-color;
+  letter-spacing: 0.1rem;
+}
+
+button {
+  @include base-transition;
+  font-size: 15px;
+  background-color: rgb(144, 241, 239);
+  border: none;
+  margin: 5px;
+  padding: 10px 25px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(77, 135, 134);
+}
+
+.btn-div {
+  @include centered-flex;
+  margin-top: 10px;
 }
