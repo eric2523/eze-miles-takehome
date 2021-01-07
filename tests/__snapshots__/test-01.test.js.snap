@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`action creators Should be able to delete existing categoryRewards 1`] = `
+Array [
+  Object {
+    "categoryRewards": Object {
+      "categoryId": 100,
+      "id": 100,
+      "rewardId": 100,
+    },
+    "type": "RECEIVE_CATEGORY_REWARD",
+  },
+  Object {
+    "categoryRewards": Object {
+      "categoryId": 3,
+      "id": 1,
+      "rewardId": 3,
+    },
+    "type": "UPDATE_CATEGORY_REWARD",
+  },
+  Object {
+    "id": 1,
+    "type": "DELETE_CATEGORY_REWARD",
+  },
+]
+`;
+
+exports[`action creators Should be able to receive new categoryRewards 1`] = `
+Array [
+  Object {
+    "categoryRewards": Object {
+      "categoryId": 100,
+      "id": 100,
+      "rewardId": 100,
+    },
+    "type": "RECEIVE_CATEGORY_REWARD",
+  },
+]
+`;
+
+exports[`action creators Should be able to update existing categoryRewards 1`] = `
+Array [
+  Object {
+    "categoryRewards": Object {
+      "categoryId": 100,
+      "id": 100,
+      "rewardId": 100,
+    },
+    "type": "RECEIVE_CATEGORY_REWARD",
+  },
+  Object {
+    "categoryRewards": Object {
+      "categoryId": 3,
+      "id": 1,
+      "rewardId": 3,
+    },
+    "type": "UPDATE_CATEGORY_REWARD",
+  },
+]
+`;

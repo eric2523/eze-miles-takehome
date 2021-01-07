@@ -3,12 +3,14 @@ import { render, screen } from "./test-utils";
 import App from "../frontend/components/app";
 import { preloadedState } from "../frontend/preloaded-state";
 import "@testing-library/jest-dom";
-import configureStore from "../frontend/store/store";
 import {
   receiveCategoryRewards,
   updateCategoryRewards,
   deleteCategoryRewards,
 } from "../frontend/actions/category-rewards-actions";
+import { fireEvent } from "@testing-library/dom";
+import rootReducer from "../frontend/reducers/root_reducer";
+import configureMockStore from "redux-mock-store"
 
 describe("Table should be rendered", () => {
   it("Should have approriate headers and subheaders", () => {
@@ -61,8 +63,10 @@ describe("Table should be rendered", () => {
   });
 });
 
-describe("Dispatching actions", () => {
-  const store = configureStore(preloadedState);
+describe("action creators", () => {
+  const mockStore = configureMockStore()
+  const store = mockStore(preloadedState)
+
   it("Should be able to receive new categoryRewards", () => {
     store.dispatch(
       receiveCategoryRewards({
@@ -71,8 +75,9 @@ describe("Dispatching actions", () => {
         rewardId: 100,
       })
     );
-    let newState = store.getState();
-    expect(newState.entities.categoryRewards.byId[100]).not.toBeEmpty;
+  
+    expect(store.getActions()).toMatchSnapshot()
+    expect(store.getState().entities.categoryRewards.byId[100]).not.toBeEmpty
   });
 
   it("Should be able to update existing categoryRewards", () => {
@@ -83,16 +88,19 @@ describe("Dispatching actions", () => {
         rewardId: 3,
       })
     );
-
-    let newState = store.getState();
-    expect(newState.entities.categoryRewards.byId[1].categoryId).toEqual(3);
-    expect(newState.entities.categoryRewards.byId[1].rewardId).toEqual(3);
+    
+    expect(store.getActions()).toMatchSnapshot()
   });
 
   it("Should be able to delete existing categoryRewards", () => {
     store.dispatch(deleteCategoryRewards(1));
 
-    let newState = store.getState();
-    expect(newState.entities.categoryRewards.byId[1]).toBeEmpty;
+    expect(store.getActions()).toMatchSnapshot()
   });
 });
+
+describe("Clickable elements should update DOM accordingly", () => {
+  it("X button should remove data entry", () => {
+    render(<App />, { initialState: preloadedState });
+  })
+})
