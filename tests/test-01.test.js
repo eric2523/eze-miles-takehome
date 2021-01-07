@@ -104,46 +104,52 @@ describe("Action Creators", () => {
   });
 });
 
-describe("user interaction", () => {
-  it("X button should remove data entry", () => {
-    render(<App />, { initialState: preloadedState });
-
-    const buttons = screen.getAllByTestId("x-btn");
-    buttons.forEach((button) => {
-      fireEvent.click(button);
+describe("User Interaction", () => {
+  describe("X-Button", () => {
+    it("X button should remove data entry", () => {
+      render(<App />, { initialState: preloadedState });
+  
+      const buttons = screen.getAllByTestId("x-btn");
+      buttons.forEach((button) => {
+        fireEvent.click(button);
+      });
+      let filledCells = screen.queryAllByTestId("row-item");
+      expect(filledCells).toBeEmpty;
     });
-    let filledCells = screen.queryAllByTestId("row-item");
-    expect(filledCells).toBeEmpty;
-  });
+  })
 
-  it("Undo button should retrieve most recent action from past", () => {
-    render(<App />, { initialState: preloadedState });
-    const old = screen.getByTestId("main-table").innerHTML;
-    const button = screen.getAllByTestId("x-btn")[0];
-    const undoBtn = screen.getByTestId("undo-btn")
+  describe("Undo Button", () => {
+    it("Should retrieve most recent action from past", () => {
+      render(<App />, { initialState: preloadedState });
+      const old = screen.getByTestId("main-table").innerHTML;
+      const button = screen.getAllByTestId("x-btn")[0];
+      const undoBtn = screen.getByTestId("undo-btn")
+  
+      // click x button to create new display
+      fireEvent.click(button);
+      // click undo to revert back to old display
+      fireEvent.click(undoBtn)
+      expect(screen.getByTestId("main-table").innerHTML).toEqual(old);
+    });
+  })
 
-    // click x button to create new display
-    fireEvent.click(button);
-    // click undo to revert back to old display
-    fireEvent.click(undoBtn)
-    expect(screen.getByTestId("main-table").innerHTML).toEqual(old);
-  });
-
-  it("Redo button should retrieve most recent action from future", () => {
-    render(<App />, { initialState: preloadedState });
-    const redoBtn = screen.getByTestId("redo-btn")
-    const undoBtn = screen.getByTestId("undo-btn")
-    const button = screen.getAllByTestId("x-btn")[0];
-
-    // click x button to create new display
-    fireEvent.click(button)
-    // save display
-    const old = screen.getByTestId("main-table").innerHTML;
-    // click undo
-    fireEvent.click(undoBtn)
-    // click redo
-    fireEvent.click(redoBtn)
-    // compare displays
-    expect(screen.getByTestId("main-table").innerHTML).toEqual(old);
-  });
+  describe("Redo Button", () => {
+    it("Should retrieve most recent action from future", () => {
+      render(<App />, { initialState: preloadedState });
+      const redoBtn = screen.getByTestId("redo-btn")
+      const undoBtn = screen.getByTestId("undo-btn")
+      const button = screen.getAllByTestId("x-btn")[0];
+  
+      // click x button to create new display
+      fireEvent.click(button)
+      // save display
+      const old = screen.getByTestId("main-table").innerHTML;
+      // click undo
+      fireEvent.click(undoBtn)
+      // click redo
+      fireEvent.click(redoBtn)
+      // compare displays
+      expect(screen.getByTestId("main-table").innerHTML).toEqual(old);
+    });
+  })
 });
