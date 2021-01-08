@@ -5,6 +5,7 @@ $third-bg-color-a: rgba(249, 137, 72, 0.75);
 $third-bg-light-shade: rgb(253, 217, 196);
 $secondary-font-color: rgb(18, 13, 49);
 $primary-font: "Open Sans", sans-serif;
+$my-baby-blue: rgb(144, 241, 239);
 
 @mixin centered-flex {
   display: flex;
@@ -28,9 +29,9 @@ th {
 }
 
 th h1 {
-  color: $third-bg-color;
+  color: $my-baby-blue;
   text-transform: uppercase;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $my-baby-blue;
   letter-spacing: 0.2rem;
   font-size: 20px;
 }
@@ -109,7 +110,7 @@ td {
 button {
   @include base-transition;
   font-size: 15px;
-  background-color: rgb(144, 241, 239);
+  background-color: $my-baby-blue;
   border: none;
   margin: 5px;
   padding: 10px 25px;
@@ -125,4 +126,19 @@ button:hover {
 .btn-div {
   @include centered-flex;
   margin-top: 10px;
+}
+
+.socials {
+  @include centered-flex;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+img {
+  @include base-transition;
+  border-radius: 50%;
+}
+
+img:hover {
+  background-color: rgba(0, 0, 0, 0.25);
 }

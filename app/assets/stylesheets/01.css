@@ -8,9 +8,9 @@ th {
   padding: 20px; }
 
 th h1 {
-  color: #f98948;
+  color: #90f1ef;
   text-transform: uppercase;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #90f1ef;
   letter-spacing: 0.2rem;
   font-size: 20px; }
 
@@ -93,5 +93,19 @@ button:hover {
   justify-content: center;
   align-items: center;
   margin-top: 10px; }
+
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer; }
+
+img {
+  transition: all 200ms ease-in-out;
+  border-radius: 50%; }
+
+img:hover {
+  background-color: rgba(0, 0, 0, 0.25); }
 
 /*# sourceMappingURL=01.css.map */
